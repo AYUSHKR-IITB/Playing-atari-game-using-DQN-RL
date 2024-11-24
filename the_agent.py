@@ -91,7 +91,8 @@ class Agent():
             labels[i][action] = next_rewards[i] + (not next_done_flags[i]) * self.gamma * max(next_state_values[i])
 
         """Train our model using the states and outputs generated"""
-        self.model.fit(np.array(states),labels,batch_size = 32, epochs = 1, verbose = 0)
+        with tf.device('/GPU:0'):  # Explicitly specify GPU
+            self.model.fit(np.array(states), labels, batch_size=32, epochs=1, verbose=0)
 
         """Decrease epsilon and update how many times our agent has learned"""
         if self.epsilon > self.epsilon_min:

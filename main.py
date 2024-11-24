@@ -24,7 +24,7 @@ env.reset()
 for i in range(1000000):
     timesteps = agent.total_timesteps
     timee = time.time()
-    score = environment.play_episode(name, env, agent, debug = True) #set debug to true for rendering
+    score = environment.play_episode(name, env, agent, debug = False) #set debug to true for rendering
     scores.append(score)
     if score > max_score:
         max_score = score

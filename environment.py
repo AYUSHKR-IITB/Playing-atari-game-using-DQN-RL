@@ -17,7 +17,7 @@ def initialize_new_game(name, env, agent):
 
 def make_env(name, agent):
     gym.register_envs(ale_py)
-    env = gym.make(name, render_mode="human")
+    env = gym.make(name)
     return env
 
 def take_step(name, env, agent, score, debug):
