@@ -6,7 +6,7 @@ from collections import deque
 import numpy as np
 
 name = "ALE/Pong-v5"
-agent = the_agent.Agent(possible_actions=[0,2,3],starting_mem_len=50000,max_mem_len=750000,starting_epsilon = 1, learn_rate = .00025)
+agent = the_agent.Agent(possible_actions=[0,2,3],starting_mem_len=500,max_mem_len=7500,starting_epsilon = 1, learn_rate = .00025)
 env = environment.make_env(name,agent)
 
 last_100_avg = [-21]

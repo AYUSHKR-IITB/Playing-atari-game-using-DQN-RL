@@ -74,16 +74,17 @@ class Agent():
                 next_state = [self.memory.frames[index-2], self.memory.frames[index-1], self.memory.frames[index], self.memory.frames[index+1]]
                 next_state = np.moveaxis(next_state,0,2)/255
 
-                states.append(state)
+                states.append(state)#all are of 32
                 next_states.append(next_state)
                 actions_taken.append(self.memory.actions[index])
                 next_rewards.append(self.memory.rewards[index+1])
                 next_done_flags.append(self.memory.done_flags[index+1])
 
         """Now we get the ouputs from our model, and the target model. We need this for our target in the error function"""
+        print(np.array(states).shape)
         labels = self.model.predict(np.array(states))
         next_state_values = self.model_target.predict(np.array(next_states))
-        
+        print(labels.shape,next_state_values.shape)
         """Now we define our labels, or what the output should have been
            We want the output[action_taken] to be R_(t+1) + Qmax_(t+1) """
         for i in range(32):
@@ -91,8 +92,8 @@ class Agent():
             labels[i][action] = next_rewards[i] + (not next_done_flags[i]) * self.gamma * max(next_state_values[i])
 
         """Train our model using the states and outputs generated"""
-        with tf.device('/GPU:0'):  # Explicitly specify GPU
-            self.model.fit(np.array(states), labels, batch_size=32, epochs=1, verbose=0)
+        
+        self.model.fit(np.array(states), labels, batch_size=32, epochs=1, verbose=0)
 
         """Decrease epsilon and update how many times our agent has learned"""
         if self.epsilon > self.epsilon_min:
