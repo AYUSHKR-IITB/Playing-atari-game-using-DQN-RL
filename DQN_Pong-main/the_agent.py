@@ -68,7 +68,7 @@ class Agent:
         return True
 
     def learn(self, debug=False):
-        print(len(self.starting_mem_len))
+        # print(len(self.starting_mem_len))
         if len(self.memory.frames) < self.starting_mem_len:
             return
 
@@ -119,7 +119,7 @@ class Agent:
         # print(current_q_values.size(),next_q_values.size(),target_q_values.size())
         # Compute loss and update
         
-        criterion = nn.MSELoss()  # Loss function (e.g., Mean Squared Error)
+        criterion = nn.SmoothL1Loss()  # Loss function (e.g., Mean Squared Error)
         optimizer = torch.optim.Adam(self.model.parameters(), lr=1e-3)  # Optimizer
 
         # Forward pass and compute loss

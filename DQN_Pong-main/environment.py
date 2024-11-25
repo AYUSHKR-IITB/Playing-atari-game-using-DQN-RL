@@ -24,7 +24,7 @@ def take_step(name, env, agent, score, debug):
     # 1 and 2: Update timesteps and save weights
     agent.total_timesteps += 1
     if agent.total_timesteps % 50000 == 0:
-        agent.model.save_weights('recent_weights.hdf5')
+        agent.save_weights('recent_weights.hdf5')
         print('\nWeights saved!')
 
     # 3: Take action

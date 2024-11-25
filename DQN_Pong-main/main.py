@@ -12,8 +12,8 @@ print(f"Using device: {device}")
 
 name = "ALE/Pong-v5"
 agent = the_agent.Agent(possible_actions=[0,2,3], 
-              starting_mem_len=5000,
-              max_mem_len=75000,
+              starting_mem_len=50000,
+              max_mem_len=750000,
               starting_epsilon=1, 
               learn_rate=.00025)
 
@@ -33,7 +33,7 @@ env.reset()
 for i in range(1000):
     timesteps = agent.total_timesteps
     timee = time.time()
-    score = play_episode(name, env, agent, debug=True)  # set debug to true for rendering
+    score = play_episode(name, env, agent, debug=False)  # set debug to true for rendering
     scores.append(score)
     
     if score > max_score:
